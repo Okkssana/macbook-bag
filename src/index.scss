@@ -1,0 +1,411 @@
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+p,
+img,
+ol,
+ul,
+li,
+footer,
+header,
+nav,
+section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body {
+  line-height: 1;
+  font-family: 'Jost', sans-serif;
+  // font-family: 'Amatic SC', cursive;
+  color: #000;
+  font-size: 16px;
+  background-color: aqua;
+}
+
+* {
+  font-family: 'Jost', sans-serif;
+}
+
+footer,
+header,
+menu,
+nav,
+section {
+  display: block;
+}
+
+html,
+body {
+  box-sizing: border-box;
+}
+
+*,
+*:after,
+:before {
+  box-sizing: inherit;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  text-decoration: none;
+  color: #000;
+}
+
+.App {
+  background-color: #fff;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+  max-width: 1080px;
+  margin: 30px auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-bottom: 1px solid #8c8c8c;
+}
+
+.headerLeft {
+
+  display: flex;
+  align-items: center;
+
+  .logo {
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    border: 1px solid #8c8c8c;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.77);
+    border-radius: 50%;
+    background-color: #d2d2d2;
+  }
+
+  .headerInfo {
+
+    margin-left: 15px;
+
+    h3 {
+      font-family: 'Amatic SC', cursive;
+      font-size: 24px;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    p {
+      opacity: 0.5;
+    }
+  }
+}
+
+.headerRight {
+
+  display: flex;
+
+  .navLeft {
+
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+
+    span {
+      margin-top: 9px;
+      text-transform: uppercase;
+      color: #8C8C8C;
+      font-weight: 700;
+    }
+
+    .cart {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      margin-right: 10px;
+
+
+    }
+  }
+
+  .navRight {
+
+    display: flex;
+    align-items: center;
+
+    .chosen {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      margin-right: 30px;
+    }
+
+    .user {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+  }
+
+}
+
+.content {
+  padding: 20px;
+
+  .contentBox {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+
+
+    .search-block {
+      display: inline-block;
+      border: 1px solid #8c8c8c;
+      border-radius: 25px;
+      padding: 0 15px;
+
+      img {
+        margin-right: 10px;
+      }
+
+      input {
+        border: none;
+        padding: 5px;
+        font-size: 16px;
+        width: 200px;
+        outline: none;
+      }
+    }
+
+
+  }
+
+
+  h1 {
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .cards {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 200px;
+    padding: 20px;
+    border: 1px solid #f9e6e6;
+    border-radius: 40px;
+    text-align: center;
+    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in;
+
+    &:hover {
+      box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
+      transform: translateY(-5px);
+    }
+
+    .cardImg {
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    .elected {
+      position: absolute;
+      cursor: pointer;
+    }
+
+    .price-box {
+      display: flex;
+      justify-content: space-between;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .price {
+        text-transform: uppercase;
+        font-size: 13px;
+        opacity: 0.5;
+        margin-bottom: 5px;
+      }
+
+      .priceValue {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 18px;
+      }
+
+      button {
+        display: block;
+        align-self: flex-end;
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+
+        img {
+          padding: 5px;
+          border-radius: 5px;
+          border: 1px solid #8C8C8C;
+        }
+      }
+    }
+  }
+}
+
+.overlay {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.drawer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 385px;
+  height: 100%;
+  right: 0;
+  background: #FFFFFF;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+
+  h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 22px;
+
+    .closeBtn {
+      border: none;
+    }
+  }
+
+
+
+  .drawerItems {
+    overflow: auto;
+
+    .drawerItem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 20px;
+      padding: 20px;
+      border: 1px solid #f9e6e6;
+      border-radius: 20px;
+      max-width: 330px;
+
+      .drawerImg {
+        width: 70px;
+        height: 50px;
+        margin-right: 10px;
+      }
+
+      p {
+        margin-right: 10px;
+        margin-bottom: 7px;
+      }
+
+      span {
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+
+    }
+  }
+
+  .drawerTotal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+
+
+    .drawerTotalItem {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+
+      .drawerPrice {
+        font-weight: 700;
+
+        span {
+          display: inline-block;
+          margin-left: 7px;
+        }
+      }
+    }
+
+
+    p {
+      font-size: 18px;
+    }
+  }
+
+
+}
+
+.btn {
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #827f7e;
+  border-radius: 15px;
+  border: none;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background: lighten(#827f7e, 25%);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  &:active {
+    background: darken(#827f7e, 5%);
+  }
+}
+
+.closeBtn {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.2s ease-in;
+
+  &:hover {
+    opacity: 1;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+  }
+}
