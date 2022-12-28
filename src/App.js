@@ -1,7 +1,21 @@
-import Card from "./components/Card/Card";
-import Drawer from "./components/Drawer/Drawer";
-import Header from "./components/Header/Header";
+import Card from './components/Card/Card';
+import Drawer from './components/Drawer/Drawer';
+import Header from './components/Header/Header';
 
+const arr = [
+  {
+    name: 'MacBook bag Black Maple leaf',
+    price: 850,
+    src: './images/bags/1.jpg',
+  },
+  { name: 'MacBook bag Cactus', price: 950, src: './images/bags/2.jpg' },
+  {
+    name: 'MacBook bag Yellow chrysanthemum',
+    price: 850,
+    src: './images/bags/3.jpg',
+  },
+  { name: 'MacBook bag Spacecraft', price: 950, src: './images/bags/4.jpg' },
+];
 
 function App() {
   return (
@@ -20,12 +34,20 @@ function App() {
           </div>
         </div>
         <div className='cards'>
-          <Card
+          {/* <Card
             src={'./images/bags/1.jpg'}
             name={'MacBook bag Black Maple leaf'}
             price={850}
-          />
-          <Card
+          /> */}
+          {arr.map(obj => {
+            return (
+              <Card
+            src={obj.src}
+            name={obj.name}
+            price={obj.price} />
+            )
+          })}
+          {/* <Card
             src={'./images/bags/2.jpg'}
             name={'MacBook bag Cactus'}
             price={850}
@@ -38,8 +60,8 @@ function App() {
           <Card
             src={'./images/bags/4.jpg'}
             name={'MacBook bag Spacecraft'}
-            price={850}
-          />
+            price={950}
+          /> */}
         </div>
       </div>
     </div>

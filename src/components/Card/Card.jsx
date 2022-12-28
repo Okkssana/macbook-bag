@@ -1,17 +1,23 @@
-function Card (props) {
+import ss from './Card.module.scss'
+
+function Card(props) {
+  function openCart(params) {
+    return alert('Вы нажали на +');
+    // document.querySelector('.overlay')
+  }
   return (
-    <div className='card'>
-      <div className='elected'>
+    <div className={ss.card}>
+      <div className={ss.elected}>
         <img src={'/images/chosen-unliked.svg'} alt='unliked' />
       </div>
-      <img className='cardImg' src={props.src} alt='bag' />
+      <img className={ss.cardImg} src={props.src} alt='bag' />
       <p>{props.name}</p>
-      <div className='price-box'>
+      <div className={ss.priceBox}>
         <div>
-          <span className='price'>Price:</span>
-          <span className='priceValue'>{props.price} UAH</span>
+          <span className={ss.price}>Price:</span>
+          <span className={ss.priceValue}>{props.price} UAH</span>
         </div>
-        <button>
+        <button onClick={openCart}>
           <img src='images/vector.png' alt='plus' />
         </button>
       </div>
