@@ -1,6 +1,7 @@
 import s from './Header.module.scss';
 
-function Header() {
+function Header(props) {
+  
   return (
     <header className={s.header}>
       <div className={s.headerLeft}>
@@ -11,12 +12,12 @@ function Header() {
         </div>
       </div>
       <ul className={s.headerRight}>
-        <li className={s.navLeft}>
+        <li className={s.navLeft} onClick={props.onCartClick}>
           <img className={s.cart} src='/images/cart.svg' alt='cart' />
           <span>1700 UAH</span>
         </li>
         <li className={s.navRight}>
-          <img className={s.chosen} src='/images/chosen.png' alt='chosen' />
+          <img className={s.chosen} src='/images/chosen.svg' alt='chosen' />
           <img className={s.user} src='/images/user.png' alt='user' />
         </li>
       </ul>

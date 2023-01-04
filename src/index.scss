@@ -64,6 +64,9 @@ a {
   text-decoration: none;
   color: #000;
 }
+img {
+  display: block;
+}
 
 .App {
   background-color: #fff;
@@ -178,6 +181,7 @@ a {
       padding: 0 15px;
 
       img {
+        display: inline-block;
         margin-right: 10px;
       }
 
@@ -199,9 +203,15 @@ a {
     text-align: center;
   }
 
+  // .cards {
+  //   display: flex;
+  //   justify-content: space-evenly;
+  // }
   .cards {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
     justify-content: space-evenly;
+    grid-gap: 20px;
   }
 
   // .card {
@@ -280,16 +290,7 @@ a {
   // }
 }
 
-.overlay {
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-}
+
 
 // .drawer {
 //   position: absolute;
