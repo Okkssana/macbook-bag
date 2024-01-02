@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/macbook-bag/static/css/main.ee257ae1.css",
+    "main.js": "/macbook-bag/static/js/main.ccbc6bd1.js",
+    "index.html": "/macbook-bag/index.html",
+    "main.ee257ae1.css.map": "/macbook-bag/static/css/main.ee257ae1.css.map",
+    "main.ccbc6bd1.js.map": "/macbook-bag/static/js/main.ccbc6bd1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ee257ae1.css",
+    "static/js/main.ccbc6bd1.js"
+  ]
+}
