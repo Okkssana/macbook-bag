@@ -1,237 +1,381 @@
-import React, { useState } from 'react';
-import Card from './components/Card/Card';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import axios from 'axios';
+
 import Drawer from './components/Drawer/Drawer';
 import Header from './components/Header/Header';
+import Selected from './pages/Selected';
+import Home from './pages/Home';
+import AppContext from './context';
+import Orders from './pages/Orders';
 
-const arr = [
-  {
-    name: 'MacBook bag Black Maple leaf',
-    price: 850,
-    src: './images/bags/1.jpg',
-  },
-  { name: 'MacBook bag Cactus', price: 950, src: './images/bags/2.jpg' },
-  {
-    name: 'MacBook bag Yellow chrysanthemum',
-    price: 850,
-    src: './images/bags/3.jpg',
-  },
-  { name: 'MacBook bag Spacecraft', price: 950, src: './images/bags/4.jpg' },
-  {
-    name: 'MacBook bag Blue Forest',
-    price: 950,
-    src: './images/bags/5.jpg',
-  },
-  {
-    name: 'MacBook bag Eichhornia',
-    price: 950,
-    src: './images/bags/6.jpg',
-  },
-  {
-    name: 'MacBook bag Banana Leaf',
-    price: 800,
-    src: './images/bags/7.jpg',
-  },
-  {
-    name: 'MacBook bag White Small Fresh',
-    price: 850,
-    src: './images/bags/8.jpg',
-  },
-  {
-    name: 'MacBook bag Black',
-    price: 900,
-    src: './images/bags/9.jpg',
-  },
-  {
-    name: 'MacBook bag Flower Arrangement',
-    price: 900,
-    src: './images/bags/10.jpg',
-  },
-  {
-    name: 'MacBook bag Black Plant',
-    price: 800,
-    src: './images/bags/11.jpg',
-  },
-  {
-    name: 'MacBook bag Painted',
-    price: 850,
-    src: './images/bags/12.jpg',
-  },
-  {
-    name: 'MacBook bag Small Blue Flower',
-    price: 950,
-    src: './images/bags/13.jpg',
-  },
-  {
-    name: 'MacBook bag Starry Sky',
-    price: 850,
-    src: './images/bags/14.jpg',
-  },
-  {
-    name: 'MacBook bag Flower Arrangement 2',
-    price: 800,
-    src: './images/bags/15.jpg',
-  },
-  {
-    name: 'MacBook bag Red Bohemia',
-    price: 950,
-    src: './images/bags/16.jpg',
-  },
-  {
-    name: 'MacBook bag Seaweed',
-    price: 950,
-    src: './images/bags/17.jpg',
-  },
-  {
-    name: 'MacBook bag Herbaceous Flower',
-    price: 850,
-    src: './images/bags/18.jpg',
-  },
-  {
-    name: 'MacBook bag White Plant',
-    price: 850,
-    src: './images/bags/19.jpg',
-  },
-  {
-    name: 'MacBook bag Blue Snowflaker',
-    price: 850,
-    src: './images/bags/20.jpg',
-  },
-  {
-    "name": "MacBook bag Black Maple leaf",
-    "price": 850,
-    "src": "./images/bags/1.jpg"
-  },
-  { "name": "MacBook bag Cactus", "price": 950, "src": "./images/bags/2.jpg" },
-  {
-    "name": "MacBook bag Yellow chrysanthemum",
-    "price": 850,
-    "src": "./images/bags/3.jpg"
-  },
-  { "name": "MacBook bag Spacecraft", "price": 950, "src": "./images/bags/4.jpg" },
-  {
-    "name": "MacBook bag Blue Forest",
-    "price": 950,
-    "src": "./images/bags/5.jpg"
-  },
-  {
-    "name": "MacBook bag Eichhornia",
-    "price": 950,
-    "src": "./images/bags/6.jpg"
-  },
-  {
-    "name": "MacBook bag Banana Leaf",
-    "price": 800,
-    "src": "./images/bags/7.jpg"
-  },
-  {
-    "name": "MacBook bag White Small Fresh",
-    "price": 850,
-    "src": "./images/bags/8.jpg"
-  },
-  {
-    "name": "MacBook bag Black",
-    "price": 900,
-    "src": "./images/bags/9.jpg"
-  },
-  {
-    "name": "MacBook bag Flower Arrangement",
-    "price": 900,
-    "src": "./images/bags/10.jpg"
-  },
-  {
-    "name": "MacBook bag Black Plant",
-    "price": 800,
-    "src": "./images/bags/11.jpg"
-  },
-  {
-    "name": "MacBook bag Painted",
-    "price": 850,
-    "src": "./images/bags/12.jpg"
-  },
-  {
-    "name": "MacBook bag Small Blue Flower",
-    "price": 950,
-    "src": "./images/bags/13.jpg"
-  },
-  {
-    "name": "MacBook bag Starry Sky",
-    "price": 850,
-    "src": "./images/bags/14.jpg"
-  },
-  {
-    "name": "MacBook bag Flower Arrangement 2",
-    "price": 800,
-    "src": "./images/bags/15.jpg"
-  },
-  {
-    "name": "MacBook bag Red Bohemia",
-    "price": 950,
-    "src": "./images/bags/16.jpg"
-  },
-  {
-    "name": "MacBook bag Seaweed",
-    "price": 950,
-    "src": "./images/bags/17.jpg"
-  },
-  {
-    "name": "MacBook bag Herbaceous Flower",
-    "price": 850,
-    "src": "./images/bags/18.jpg"
-  },
-  {
-    "name": "MacBook bag White Plant",
-    "price": 850,
-    "src": "./images/bags/19.jpg"
-  },
-  {
-    "name": "MacBook bag Blue Snowflaker",
-    "price": 850,
-    "src": "./images/bags/20.jpg"
-  }
-];
-
+// export const AppContext = createContext({});
+// console.log(AppContext);
 
 function App() {
+  function getCurrentFormattedDate() {
+    const currentDate = new Date();
+
+    // Извлекаем компоненты даты
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Месяцы в JavaScript начинаются с 0
+    const year = currentDate.getFullYear();
+    const hours = String(currentDate.getHours()).padStart(2, '0');
+    const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+    // Собираем строку в нужном формате
+    const formattedDate = `${day}.${month}.${year} ${hours}:${minutes}`;
+    return formattedDate;
+  }
+  // Получаем текущую отформатированную дату и время
+  const currentFormattedDate = getCurrentFormattedDate();
+  // Выводим результат
+  console.log(currentFormattedDate);
+
+  const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
+  //const [orders, setOrders] = useState([]);
+  // const [isInCart, setIsInCart] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+
   const [cartOpened, setCartOpened] = useState(false);
+  const [isOrderAccepted, setIsOrderAccepted] = useState(false);
+  const [cartClosedId, setCartClosedId] = useState('');
+  const [orderId, setOrderId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  console.log(cartItems);
+  console.log(JSON.stringify(cartItems));
+  console.log('cartItems');
+
   // const [drawerBtn, setDrawerBtn] = useState(true);
-  
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setIsLoading(true);
+  //     const cartResponse = await axios.get(
+  //       'https://63b598850f49ecf508aa5838.mockapi.io/cart'
+  //     );
+
+  //     const selectedResponse = await axios.get(
+  //       'https://63c26a00e3abfa59bdace7e9.mockapi.io/selected'
+  //     );
+  //     const itemsResponse = await axios.get(
+  //       'https://63b598850f49ecf508aa5838.mockapi.io/items'
+  //     );
+  //     setIsLoading(false);
+  //     setCartItems(cartResponse.data);
+  //     setSelectedItems(selectedResponse.data);
+  //     setItems(itemsResponse.data);
+  //   }
+  //   fetchData()
+  // }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setIsLoading(true);
+        const [cartResponse, selectedResponse, itemsResponse ] =
+          await Promise.all([
+            axios.get('https://63b598850f49ecf508aa5838.mockapi.io/cart'),
+            axios.get('https://63c26a00e3abfa59bdace7e9.mockapi.io/selected'),
+            axios.get('https://63b598850f49ecf508aa5838.mockapi.io/items'),
+          ]);
+          
+
+        setCartItems(cartResponse.data);
+        setSelectedItems(selectedResponse.data);
+        //setOrders(orderResponse.data);
+        //console.log(orderResponse.data);
+        console.log('orderResponse.data');
+        setItems(itemsResponse.data);
+      } catch (error) {
+        console.error(
+          'An error occurred while fetching data: ошибка в App.js',
+          error
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+  //убрала finally {setIsLoading(false)} из-за него подвисала загрузка home
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const orderResponse = await axios.get(
+  //         'https://63c26a00e3abfa59bdace7e9.mockapi.io/orders'
+  //       );
+  //       setOrders(orderResponse.data);
+  //       setIsLoading(false);
+  //     } catch (error) {
+  //       console.error(
+  //         'An error occurred while fetching data: ошибка в useEffect Orders',
+  //         error
+  //       );
+  //     }
+  //   }
+
+  //   fetchData();
+  // }, [orderId]);
+
+  const onAddToCart = async (obj) => {
+    console.log(obj);
+    console.log('obj');
+    console.log(items);
+    console.log('items');
+
+    console.log(cartItems);
+    console.log('cartItems');
+    console.log(selectedItems);
+    console.log('selectedItems');
+
+    try {
+      const findItem = cartItems.find(
+        (cartItem) => Number(cartItem.parentId) === Number(obj.parentId)
+      );
+      if (findItem) {
+        setCartItems((prev) =>
+          prev.filter((item) => Number(item.parentId) !== Number(obj.parentId))
+        );
+        await axios
+          .delete(
+            `https://63b598850f49ecf508aa5838.mockapi.io/cart/${findItem.id}`
+          )
+          .then((res) => console.log(res.data), console.log('res.data'));
+        
+        console.log('ho');
+      } else {
+        setCartItems((prev) => [...prev, obj]);
+        const { data } = await axios.post(
+          'https://63b598850f49ecf508aa5838.mockapi.io/cart',
+          obj
+        );
+        setCartItems((prev) =>
+          prev.map((item) => {
+            if (item.parentId === data.parentId) {
+              return {
+                ...item,
+                id: data.id,
+              };
+            }
+            return item;
+          })
+        );
+      }
+      console.log('he');
+    } catch (error) {
+      console.error(
+        'An error occurred while fetching data: onAddToCart',
+        error
+      );
+    }
+  };
+  //в onRemoveCartItem убрала async await из-за него тормозило удаление товаров из корзины
+  const onRemoveCartItem = async (id, parentId) => {
+    try {
+      setCartItems((prev) => prev.filter((item) => item.id !== id));
+      setCartClosedId(parentId);
+      await axios.delete(`https://63b598850f49ecf508aa5838.mockapi.io/cart/${id}`);
+    } catch (error) {
+      console.error(
+        'An error occurred while fetching data: onRemoveCartItem',
+        error
+      );
+    }
+  };
+  const onAddToSelected = async (obj) => {
+    try {
+      const findItem = selectedItems.find(
+        (favObj) => Number(favObj.parentId) === Number(obj.id)
+      );
+      if (findItem) {
+        await axios.delete(
+          `https://63c26a00e3abfa59bdace7e9.mockapi.io/selected/${findItem.id}`
+        );
+        setSelectedItems((prev) =>
+          prev.filter((item) => Number(item.parentId) !== Number(obj.id))
+        );
+      } else {
+        setSelectedItems((prev) => [...prev, obj]);
+        const { data } = await axios.post(
+          'https://63c26a00e3abfa59bdace7e9.mockapi.io/selected',
+          obj
+        );
+        setSelectedItems((prev) =>
+          prev.map((item) => {
+            if (item.parentId === data.parentId) {
+              return {
+                ...item,
+                id: data.id,
+              };
+            }
+            return item;
+          })
+        );
+      }
+    } catch (error) {
+      console.error(
+        'An error occurred while fetching data: onAddToSelected',
+        error
+      );
+    }
+  };
+  const deleteFromSelected =  async (obj) => {
+    try {
+      setSelectedItems((prev) =>
+        prev.filter((item) => Number(item.id) !== Number(obj.id))
+      );
+       await axios.delete(
+        `https://63c26a00e3abfa59bdace7e9.mockapi.io/selected/${obj.id}`
+      );
+    } catch (error) {
+      console.error(
+        'An error occurred while fetching data: deleteFromSelected',
+        error
+      );
+    }
+  };
+  // const onAddToSelected = async (obj) => {
+  //   try {
+  //     const findItem = selectedItems.find(
+  //       (favObj) => Number(favObj.parentId) === Number(obj.id)
+  //     );
+  //     if (findItem) {
+  //       axios.delete(
+  //         `https://63c26a00e3abfa59bdace7e9.mockapi.io/selected/${findItem.id}`
+  //       );
+  //       setSelectedItems((prev) =>
+  //         prev.filter((item) => Number(item.id) !== Number(findItem.id))
+  //       );
+  //     } else {
+  //       setSelectedItems((prev) => [...prev, obj]);
+  //       const { data } = await axios.post(
+  //         'https://63c26a00e3abfa59bdace7e9.mockapi.io/selected',
+  //         obj
+  //       );
+  //       setSelectedItems((prev) =>
+  //         prev.map((item) => {
+  //           if (item.parentId === data.parentId) {
+  //             return {
+  //               ...item,
+  //               id: data.id,
+  //             };
+  //           }
+  //           return item;
+  //         })
+  //       );
+
+  //       console.log(data);
+  //       console.log('data');
+  //     }
+  //   } catch (error) {
+  //     alert('Не удалось добавить в избраные');
+  //   }
+
+  //   // axios
+  //   //   .post('https://63c26a00e3abfa59bdace7e9.mockapi.io/selected', obj)
+  //   //   .then((res) =>
+  //   //     setSelectedItems((prev) => [...prev, res.data], console.log(res))
+  //   //   );
+  // };
+
+  function onChangeSearchInput(event) {
+    setSearchValue(event.target.value);
+  }
+  console.log(isOrderAccepted);
+  console.log('isOrderAccepted');
   return (
-    <div className='App'>
-      {cartOpened && (
+    <AppContext.Provider
+      value={{
+        items,
+        cartItems,
+        selectedItems,
+        setCartOpened,
+        setCartItems,
+        isOrderAccepted,
+        setIsOrderAccepted,
+        orderId,
+        setOrderId,
+        //orders,
+        currentFormattedDate,
+      }}
+    >
+      <div className='App'>
+        {/* {cartOpened && (
+          <Drawer
+            closeDrawer={() => {
+              setCartOpened(false);
+            }}
+            cartItems={cartItems}
+            onRemove={onRemoveCartItem}
+          />
+        )} */}
         <Drawer
           closeDrawer={() => {
             setCartOpened(false);
           }}
+          cartItems={cartItems}
+          onRemove={onRemoveCartItem}
+          opened={cartOpened}
         />
-      )}
-      <Header
-        onCartClick={() => {
-          setCartOpened(true);
-        }}
-      />
-      <div className='content'>
-        <div className='contentBox'>
-          <h1>All bags</h1>
+        <Header
+          onCartClick={() => {
+            setCartOpened(true);
+          }}
+        />
 
-          <div className='search-block'>
-            <img src='/images/search.png' alt='search' />
-            <input type='text' placeholder='Search' />
-          </div>
-        </div>
-        <div className='cards'>
-          {arr.map((obj, i) => {
-            return (
-              <Card
-                src={obj.src}
-                name={obj.name}
-                price={obj.price}
-                key={i}
+        <Routes>
+          <Route
+            path='/'
+            exact
+            element={
+              <Home
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                onChangeSearchInput={onChangeSearchInput}
+                // items={items}
+                onAddToSelected={onAddToSelected}
+                onAddToCart={onAddToCart}
+                // cartItems={cartItems}
+                cartClosedId={cartClosedId}
+                // selectClosedId={selectClosedId}
+                // selectedItems={selectedItems}
+                isLoading={isLoading}
               />
-            );
-          })}
-        </div>
+            }
+          />
+          <Route
+            path='/selected'
+            element={
+              <Selected
+                // selectedItems={selectedItems}
+                onAddToSelected={onAddToSelected}
+                // items={items}
+                onAddToCart={onAddToCart}
+                // cartItems={cartItems}
+                cartClosedId={cartClosedId}
+                deleteFromSelected={deleteFromSelected}
+                // selectClosedId={selectClosedId}
+                isLoading={isLoading}
+              />
+            }
+          />
+          <Route
+            path='/orders'
+            element={
+              <Orders
+                onAddToSelected={onAddToSelected}
+                onAddToCart={onAddToCart}
+                cartClosedId={cartClosedId}
+                deleteFromSelected={deleteFromSelected}
+              />
+            }
+          />
+        </Routes>
       </div>
-    </div>
+    </AppContext.Provider>
   );
 }
 
