@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/macbook-bag/static/css/main.ee257ae1.css",
-    "main.js": "/macbook-bag/static/js/main.13c5116b.js",
+    "main.js": "/macbook-bag/static/js/main.e8fc2d7d.js",
     "index.html": "/macbook-bag/index.html",
     "main.ee257ae1.css.map": "/macbook-bag/static/css/main.ee257ae1.css.map",
-    "main.13c5116b.js.map": "/macbook-bag/static/js/main.13c5116b.js.map"
+    "main.e8fc2d7d.js.map": "/macbook-bag/static/js/main.e8fc2d7d.js.map"
   },
   "entrypoints": [
     "static/css/main.ee257ae1.css",
-    "static/js/main.13c5116b.js"
+    "static/js/main.e8fc2d7d.js"
   ]
 }
